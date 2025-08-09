@@ -2,9 +2,9 @@ import discord
 from discord.ext import commands
 import json
 import os
-# import webserver
+import webserver
 
-# DISCORD_TOKEN = os.environ['discordkey']
+DISCORD_TOKEN = os.environ['discordkey']
 
 # Define the bot's prefix and intents
 intents = discord.Intents.default()
@@ -164,6 +164,6 @@ async def bulk_remove_games(ctx, members: commands.Greedy[discord.Member], *, ga
         
     await ctx.send(response)
 
-# webserver.keep_alive()
+webserver.keep_alive()
 # Run the bot with your token
-bot.run('MTQwMzI5MTg4MjE4Mzk4NzIyMA.GenLO5.hTMP_wzy9LuH5sIQWhb4NOvr3bSgpG6ZkL_9P4')
+bot.run(DISCORD_TOKEN)
