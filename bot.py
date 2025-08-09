@@ -2,9 +2,9 @@ import discord
 from discord.ext import commands
 import json
 import os
-import webserver
+# import webserver
 
-DISCORD_TOKEN = os.environ['discordkey']
+# DISCORD_TOKEN = os.environ['discordkey']
 
 # Define the bot's prefix and intents
 intents = discord.Intents.default()
@@ -94,7 +94,7 @@ async def view_profile(ctx, member: discord.Member = None):
 
 @bot.command(name='bulkadd')
 @commands.has_permissions(manage_messages=True) # Require a permission, e.g., "Manage Messages"
-async def bulk_add_games(ctx, *members: discord.Member, game_name: str):
+async def bulk_add_games(ctx, members: commands.Greedy[discord.Member], *, game_name: str):
     """Adds a game to multiple users' profiles.
     Usage: !bulkadd @user1 @user2 "Game Name"
     """
@@ -103,6 +103,8 @@ async def bulk_add_games(ctx, *members: discord.Member, game_name: str):
     added_to = []
     already_had = []
     
+    print(game_name)
+
     for member in members:
         user_id = str(member.id)
         if user_id not in db:
@@ -130,7 +132,7 @@ async def bulk_add_games(ctx, *members: discord.Member, game_name: str):
 
 @bot.command(name='bulkremove')
 @commands.has_permissions(manage_messages=True)
-async def bulk_remove_games(ctx, *members: discord.Member, game_name: str):
+async def bulk_remove_games(ctx, members: commands.Greedy[discord.Member], *, game_name: str):
     """Removes a game from multiple users' profiles.
     Usage: !bulkremove @user1 @user2 "Game Name"
     """
@@ -162,6 +164,6 @@ async def bulk_remove_games(ctx, *members: discord.Member, game_name: str):
         
     await ctx.send(response)
 
-webserver.keep_alive()
+# webserver.keep_alive()
 # Run the bot with your token
-bot.run(DISCORD_TOKEN)
+bot.run('MTQwMzI5MTg4MjE4Mzk4NzIyMA.GenLO5.hTMP_wzy9LuH5sIQWhb4NOvr3bSgpG6ZkL_9P4')
